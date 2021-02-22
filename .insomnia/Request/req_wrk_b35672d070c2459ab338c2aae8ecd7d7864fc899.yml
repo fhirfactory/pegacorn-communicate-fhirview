@@ -1,0 +1,21 @@
+_id: req_wrk_b35672d070c2459ab338c2aae8ecd7d7864fc899
+type: Request
+parentId: wrk_b35672d070c2459ab338c2aae8ecd7d7
+modified: 1613945390208
+created: 1613945390208
+url: "{{ base_url }}/mediaRoom/findByPractitioner"
+name: Finds media rooms  by practitionerId
+description: ""
+method: GET
+body: {}
+parameters: []
+headers: []
+authentication: {}
+metaSortKey: -1613945390208
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

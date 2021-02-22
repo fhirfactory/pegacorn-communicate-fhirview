@@ -1,0 +1,21 @@
+_id: req_wrk_b35672d070c2459ab338c2aae8ecd7d7864fc8994
+type: Request
+parentId: fld_wrk_b35672d070c2459ab338c2aae8ecd7d7037c883f
+modified: 1613945390196
+created: 1613945390196
+url: "{{ base_url }}/Roles/findAllExtantRole"
+name: Finds media rooms  by practitionerId
+description: ""
+method: GET
+body: {}
+parameters: []
+headers: []
+authentication: {}
+metaSortKey: -1613945390196
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

@@ -1,0 +1,32 @@
+_id: req_wrk_b35672d070c2459ab338c2aae8ecd7d7b94df50a
+type: Request
+parentId: wrk_b35672d070c2459ab338c2aae8ecd7d7
+modified: 1613945390213
+created: 1613945390213
+url: "{{ base_url }}/mediaGallery"
+name: create a room for each practitioner and populate the message history with
+  their media
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: |-
+    {
+      "id": 0,
+      "dateOfBirth": "2021-02-21T22:09:50.176Z",
+      "urn": "string",
+      "fullName": "string"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication: {}
+metaSortKey: -1613945390213
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

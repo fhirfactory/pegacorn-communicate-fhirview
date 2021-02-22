@@ -1,0 +1,10 @@
+_id: fld_wrk_b35672d070c2459ab338c2aae8ecd7d7aee20c6a
+type: RequestGroup
+parentId: wrk_b35672d070c2459ab338c2aae8ecd7d7
+modified: 1613945390220
+created: 1613945390220
+name: favorites
+description: Everything about favorites
+environment: {}
+environmentPropertyOrder: null
+metaSortKey: -1613945390220

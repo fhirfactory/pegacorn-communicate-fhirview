@@ -1,0 +1,14 @@
+_id: env_env_ee33f99d8e197f7d2646bff625de5803fe26fec2_sub
+type: Environment
+parentId: env_ee33f99d8e197f7d2646bff625de5803fe26fec2
+modified: 1613945390243
+created: 1613509940814
+name: OpenAPI env
+data:
+  scheme: https
+  base_path: /v2
+  host: pagacorn-communicate-fhirview.swagger.io
+dataPropertyOrder: null
+color: null
+isPrivate: false
+metaSortKey: 1613509940814
