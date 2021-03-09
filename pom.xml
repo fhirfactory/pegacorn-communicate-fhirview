@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Based on https://github.com/wildfly-extras/wildfly-camel-examples/blob/master/camel-jms/pom.xml -->
+
+    <parent>
+        <groupId>au.gov.act.health.aether</groupId>
+        <artifactId>aether-fhirbreak</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../aether-fhirbreak</relativePath>
+    </parent>
+
+    <artifactId>aether-fhirbreak-techone</artifactId>
+    <name>AETHER :: FHIRBreak :: Technology One</name>
+    <description>Message Ingestion, Transformation And Forwarding between Technology One and AETHER</description>
+    <!-- use SNAPSHOT so the fabric8-maven-plugin creates a new docker image with a new unique tag -->
+    <packaging>war</packaging>
+
+    <scm>
+        <url>https://actgovernment@dev.azure.com/ACTGovernment/Pegacorn/_git/aether-fhirbreak-techone</url>
+    </scm>
+
+    <!--  All the current unit tests required pegacorn-fhirbreak to be running in Docker. For now easier to ignore all tests -->
+    <properties>
+        <maven.test.skip>false</maven.test.skip>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- include arquillian-cube BOM -->
+            <dependency>
+                <groupId>org.arquillian.cube</groupId>
+                <artifactId>arquillian-cube-bom</artifactId>
+                <version>${version-org.arquillian-cube}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>com.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>5.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-hl7</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-fhir</artifactId>
+        </dependency>
+        <!-- This dependency includes the core HAPI-FHIR classes -->
+        <dependency>
+            <groupId>ca.uhn.hapi.fhir</groupId>
+            <artifactId>hapi-fhir-base</artifactId>
+            <version>${version-ca.uhn.hapi.fhir}</version>
+        </dependency>
+
+        <!-- At least one "structures" JAR must also be included -->
+        <dependency>
+            <groupId>ca.uhn.hapi.fhir</groupId>
+            <artifactId>hapi-fhir-structures-r4</artifactId>
+            <version>${version-ca.uhn.hapi.fhir}</version>
+        </dependency>
+
+        <!-- Used for validation -->
+        <dependency>
+            <groupId>ca.uhn.hapi.fhir</groupId>
+            <artifactId>hapi-fhir-validation-resources-r4</artifactId>
+            <version>${version-ca.uhn.hapi.fhir}</version>
+        </dependency>
+
+
+        <!-- Include the client -->
+        <dependency>
+            <groupId>ca.uhn.hapi.fhir</groupId>
+            <artifactId>hapi-fhir-client</artifactId>
+            <version>${version-ca.uhn.hapi.fhir}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.12</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- The AETHER DataSets Library (for FHIR Content Generation) -->
+        <dependency>
+            <groupId>au.gov.act.health.aether</groupId>
+            <artifactId>aether-deployment-datasets</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+            <type>jar</type>
+        </dependency>
+        <!-- The AETHER Deployment Topology Library (for setting the Deployment models) -->
+        <dependency>
+            <groupId>au.gov.act.health.aether</groupId>
+            <artifactId>aether-deployment-topology</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+            <type>jar</type>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.jboss.msc</groupId>
+            <artifactId>jboss-msc</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+            <version>${version-javax.enterprise-cdi-api}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.spec.javax.ejb</groupId>
+            <artifactId>jboss-ejb-api_3.2_spec</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.spec.javax.jms</groupId>
+            <artifactId>jboss-jms-api_2.0_spec</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.spec.javax.servlet</groupId>
+            <artifactId>jboss-servlet-api_4.0_spec</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.spec.javax.ws.rs</groupId>
+            <artifactId>jboss-jaxrs-api_2.1_spec</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Pegacorn Common Code -->
+        <dependency>
+            <groupId>net.fhirfactory.pegacorn</groupId>
+            <artifactId>pegacorn-platform-commoncode</artifactId>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>au.gov.act.health.aether</groupId>
+            <artifactId>aether-fhirbreak-commoncode</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+            <type>jar</type>
+        </dependency>
+        <!-- Pegacorn::Petasos -->
+        <dependency>
+            <groupId>net.fhirfactory.pegacorn</groupId>
+            <artifactId>pegacorn-platform-petasos-model</artifactId>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.fhirfactory.pegacorn</groupId>
+            <artifactId>pegacorn-platform-petasos-topology</artifactId>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.fhirfactory.pegacorn</groupId>
+            <artifactId>pegacorn-platform-petasos-datasets</artifactId>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.fhirfactory.pegacorn</groupId>
+            <artifactId>pegacorn-platform-petasos-core</artifactId>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+        <!-- Pegacorn::BuildingBlocks -->
+        <dependency>
+            <groupId>net.fhirfactory.pegacorn</groupId>
+            <artifactId>pegacorn-buildingblocks-processingplant</artifactId>
+            <version>${version-pegacorn}</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+        <!-- Pegacorn::BuildingBlocks -->
+        <dependency>
+            <groupId>net.fhirfactory.pegacorn</groupId>
+            <artifactId>pegacorn-buildingblocks-edge</artifactId>
+            <version>${version-pegacorn}</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>${version-org.json}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${version-org.apache.commons-lang3}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.wildfly.core</groupId>
+            <artifactId>wildfly-controller-client</artifactId>
+        </dependency>
+        <!-- Provided -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-cdi</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-endpointdsl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-jackson</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-servlet</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-undertow</artifactId>
+            <version>${version-org.apache.camel}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-netty-http</artifactId>
+            <version>${version-org.apache.camel}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-servlet</artifactId>
+            <scope>runtime</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.tomcat.embed</groupId>
+                    <artifactId>tomcat-embed-logging-juli</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!--                                      -->
+        <!--               Test                   -->
+        <!--                                      -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${version-org.junit5}</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- Shrinkwrap Support -->
+        <dependency>
+            <groupId>org.jboss.shrinkwrap.resolver</groupId>
+            <artifactId>shrinkwrap-resolver-depchain</artifactId>
+            <version>${version-org.jboss.shrinkwrap.resolver-shrinkwrap-resolver}</version>
+            <type>pom</type>
+            <scope>test</scope>
+        </dependency>
+        <!-- Arquillian General Support -->
+        <dependency>
+            <groupId>org.jboss.arquillian.junit</groupId>
+            <artifactId>arquillian-junit-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.arquillian.junit</groupId>
+            <artifactId>arquillian-junit-container</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <!-- An unit testing testing profile -->
+            <id>unit-test</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>org.junit.jupiter</groupId>
+                    <artifactId>junit-jupiter-engine</artifactId>
+                    <version>${version-org.junit5}</version>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>${version-org.apache.maven-surefire-plugin}</version>
+                        <configuration>
+                            <childDelegation>false</childDelegation>
+                            <useFile>true</useFile>
+                            <failIfNoTests>false</failIfNoTests>
+                            <rerunFailingTestsCount>0</rerunFailingTestsCount>
+                            <includes>
+                                <include>**/*Test.java</include>
+                            </includes>
+                            <forkCount>3</forkCount>
+                            <reuseForks>true</reuseForks>
+                            <argLine>-Xmx1024m -Djava.locale.providers=COMPAT</argLine>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <!-- run integration tests with mvn integration-test -P kubernetes -->
+        <profile>
+            <id>kubernetes</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <dependencies>
+                <!-- arquillian and kubernetes -->
+                <dependency>
+                    <groupId>org.arquillian.cube</groupId>
+                    <artifactId>arquillian-cube-kubernetes</artifactId>
+                    <version>${version-org.arquillian-cube-kubernetes}</version>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <groupId>io.fabric8</groupId>
+                    <artifactId>kubernetes-assertions</artifactId>
+                    <version>2.2.210</version>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <version>${version-org.apache.maven-failsafe-plugin}</version>
+                        <executions>
+                            <execution>
+                                <id>integration-tests</id>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <systemPropertyVariables>
+                                <!-- lower timeout to 1m30s instead of the default 5 minutes -->
+                                <wait.timeout>90000</wait.timeout>
+                            </systemPropertyVariables>
+                            <includes>
+                                <include>**/*KT.java</include>
+                            </includes>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <!-- Processing Plant Test Suite -->
+            <id>processing-plant-test-profile</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>junit</groupId>
+                    <artifactId>junit</artifactId>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.wildfly.arquillian</groupId>
+                    <artifactId>wildfly-arquillian-container-managed</artifactId>
+                    <version>${version-org.wildfly.arquillian-wildfly-arquillian-container-managed}</version>
+                </dependency>
+            </dependencies>
+            <build>
+              <pluginManagement>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <version>${version-org.apache.maven-dependency-plugin}</version>
+                        <executions>
+                            <execution>
+                                <id>unpack</id>
+                                <phase>process-test-classes</phase>
+                                <goals>
+                                    <goal>unpack</goal>
+                                </goals>
+                                <configuration>
+                                    <artifactItems>
+                                        <artifactItem>
+                                            <groupId>org.wildfly</groupId>
+                                            <artifactId>wildfly-dist</artifactId>
+                                            <version>${version-org.wildfly}</version>
+                                            <type>zip</type>
+                                            <overWrite>false</overWrite>
+                                            <outputDirectory>${project.basedir}/target/</outputDirectory>
+                                        </artifactItem>
+                                    </artifactItems>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>${version-org.apache.maven-antrun-plugin}</version>
+                        <executions>
+                            <execution>
+                                <id>set-wildfly-xml</id>
+                                <phase>process-test-classes</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <target>
+                                        <echo>ANT TASK - Copying standalone-full-ha.xml from
+                                            ${project.basedir}/src/test/resources/wildfly/${version-org.wildfly} to
+                                            ${project.basedir}/target/wildfly-${version-org.wildfly}/standalone/configuration
+                                        </echo>
+                                        <copy todir="${project.basedir}/target/wildfly-${version-org.wildfly}/standalone/configuration"
+                                              overwrite="true" flatten="true">
+                                            <fileset
+                                                    dir="${project.basedir}/src/test/resources/wildfly/${version-org.wildfly}/">
+                                                <include name="standalone-full-ha.xml"/>
+                                            </fileset>
+                                        </copy>
+                                    </target>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>${version-org.apache.maven-surefire-plugin}</version>
+                        <executions>
+                            <execution>
+                                <id>processing-plant-test</id>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <rerunFailingTestsCount>0</rerunFailingTestsCount>
+                            <includes>
+                                <include>**/*TestPP.java</include>
+                            </includes>
+                            <environmentVariables>
+                                <MY_POD_NAME>ArquillianTestHost</MY_POD_NAME>
+                                <MY_POD_NAMESPACE>AETHERTestHarness</MY_POD_NAMESPACE>
+                                <MY_NODE_NAME>localhost</MY_NODE_NAME>
+                            </environmentVariables>
+                            <!-- Configuration for Arquillian: -->
+                            <systemPropertyVariables>
+                                <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+                                <JBOSS_HOME>${project.basedir}/target/wildfly-${version-org.wildfly}</JBOSS_HOME>
+                                <jboss.home>${project.basedir}/target/wildfly-${version-org.wildfly}</jboss.home>
+                                <module.path>${project.basedir}/target/wildfly-${version-org.wildfly}/modules
+                                </module.path>
+                            </systemPropertyVariables>
+                            <redirectTestOutputToFile>false</redirectTestOutputToFile>
+                            <argLine>-Djava.locale.providers=COMPAT</argLine>
+                        </configuration>
+                    </plugin>
+                </plugins>
+              </pluginManagement>
+            </build>
+        </profile>
+    </profiles>
+    <build>
+        <finalName>${project.artifactId}-${project.version}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>${version-org.apache.maven-war-plugin}</version>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Dependencies>org.jboss.msc</Dependencies>
+                        </manifestEntries>
+                    </archive>
+                    <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

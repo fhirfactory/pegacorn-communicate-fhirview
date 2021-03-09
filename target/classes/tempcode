@@ -1,0 +1,12 @@
+.setHeader(Exchange.HTTP_METHOD, simple("GET"))
+				.setHeader("authority", simple("samfhirsdf.azurehealthcareapis.com"))
+				.setHeader("accept", simple("/"))
+				.setHeader("authorization", simple("Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Im5PbzNaRHJPRFhFSzFqS1doWHNsSFJfS1hFZyIsImtpZCI6Im5PbzNaRHJPRFhFSzFqS1doWHNsSFJfS1hFZyJ9.eyJhdWQiOiJodHRwczovL3NhbWZoaXJzZGYuYXp1cmVoZWFsdGhjYXJlYXBpcy5jb20iLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC80Y2E1MjI5My02NjlmLTRmYTgtODA3OC1mOGViOGI4MWE0OGQvIiwiaWF0IjoxNjE0NzY5MjM0LCJuYmYiOjE2MTQ3NjkyMzQsImV4cCI6MTYxNDc3MzEzNCwiYWNyIjoiMSIsImFpbyI6IkFWUUFxLzhUQUFBQTJ3RGhzQjZjcnBvdzJJVVA4WmFzN0QybHFIVWlxOFBnOGFjQ3d0Y1Q5Q09yVWVKbXEraGVONlNtcThRNUVWOFlRUWlMSkdnTFBKYVVYUmJHelc1cE54bUYyNFVhWm1nb0Jsa1dJaTdPVllRPSIsImFtciI6WyJwd2QiXSwiYXBwaWQiOiJmYjYxMWQ5ZS1mZTk5LTQ1YzEtYmY5Ny1mZWExNmQ1NDU0MjMiLCJhcHBpZGFjciI6IjEiLCJlbWFpbCI6InNhbXJpZGhpczE5ODBAaG90bWFpbC5jb20iLCJmYW1pbHlfbmFtZSI6IlNodSIsImdpdmVuX25hbWUiOiJTYW0iLCJpZHAiOiJsaXZlLmNvbSIsImlwYWRkciI6IjU4LjEwNS4xOTcuODEiLCJuYW1lIjoiU2FtIFNodSIsIm9pZCI6ImIwZmRmZjk3LTJmYjctNGQzNS1iYjhjLTE2MTljNDIzODExMyIsInJoIjoiMC5BV1lBa3lLbFRKOW1xRS1BZVBqcmk0R2tqWjRkWWZ1Wl9zRkZ2NWYtb1cxVVZDTm1BUGcuIiwic2NwIjoidXNlcl9pbXBlcnNvbmF0aW9uIiwic3ViIjoiRm1yWC1pcEg2OEU1Qnd3NURFU1ZHNk9NUW5odUt6X3NNMXZyZU5yMVpqdyIsInRpZCI6IjRjYTUyMjkzLTY2OWYtNGZhOC04MDc4LWY4ZWI4YjgxYTQ4ZCIsInVuaXF1ZV9uYW1lIjoibGl2ZS5jb20jc2FtcmlkaGlzMTk4MEBob3RtYWlsLmNvbSIsInV0aSI6Ik80UjVQbVg4VlUtd3dXaW0wS3RNQUEiLCJ2ZXIiOiIxLjAifQ.N_JJ9sq_Fid5vs_EDujQ5H5i-qhu_-6SN-UdDoqmY0-gKG7O3-VK-_W5T8WM40OuktEUDU7wPQZo9bhK_ckMv1imOfa3PZIcFVv4FUhB6JwqJeWAc1Pyv1ukiqzsWm_oS3aDksR_rQUW70vnwWFpXE3ldfetP5ZuriaD6bnOtMmzGHXcl0fTDW2SsgY3V1WM-hxowgApOvh0Y7lZX3jOv0xCFks4W2R0_NLGU0nvsGyUbimnVJeGWudN4DdAabvC5-qMg3EkBuRDYhHMDtP-7uBEL-6NurlyougzamPXYYmtCpE2m5OSIJY751ZDaY0uuyQwrFgTsUuu4Q_Fowsi_A"))
+				.setHeader("user-agent", simple("Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36"))
+				.setHeader("origin", simple("https://samfhirsdfdash.azurewebsites.net"))
+				.setHeader("sec-fetch-site", simple("cross-site"))
+				.setHeader("sec-fetch-mode", simple("cors"))
+				.setHeader("sec-fetch-dest", simple("empty"))
+				.setHeader("referer", simple("https://samfhirsdfdash.azurewebsites.net/"))
+				.setHeader( "accept-language", simple("en-GB,en-US;q=0.9,en;q=0.8"))
+				.to("https://samfhirsdf.azurehealthcareapis.com/Practitioner").process(new MyProcessor());
