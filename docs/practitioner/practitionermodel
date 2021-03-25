@@ -1,0 +1,26 @@
+ Practitioner:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        mxUser:(practitioner?.identifier?.value)
+          type: string
+          format: string
+        mxUserDisplayName:(practitioner.name[0].prefix + " " + practitioner.name[0].given + " " +  practitioner.name[0].family)
+          type: string
+          format: string                    
+        jobTitle:(PractitionerRole?.sepciality?.coding?.code + " " + PractitionerRole?.sepciality?.text;
+                 eample value : 208D00000X General Practice
+          type: string
+          format: string                    
+        emailAddress: (Practitioner?.telecom?.system == "email") ? Practitioner?.telecom?.value:"";
+                example value : "admin@admin.com"
+          type: string
+          format: string                    
+        phoneNumber:(Practitioner?.telecom?.system == "phone") ? Practitioner?.telecom?.value:"";
+                example value : 7814533002
+          type: string
+          format: string                    
+      xml:
+        name: Practitioner     

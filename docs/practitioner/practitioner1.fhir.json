@@ -1,0 +1,104 @@
+Executed request against FHIR RESTful server in 222ms
+ Request	POST https://pegacorn-fhirplace-gateway.site-a:30502/pegacorn/internal/fhir/r4/Practitioner?_format=json&_pretty=true
+Request Headers	
+Accept-Charset: utf-8
+Accept: application/fhir+json;q=1.0, application/json+fhir;q=0.9
+x-api-key: fmg2vPYxKYYjwcQq3fwP8zXlQKSehzgPyvR3u2Lde2eINx86QwV1ENH2wpD
+User-Agent: HAPI-FHIR/5.1.0 (FHIR Client; FHIR 4.0.1/R4; apache)
+Accept-Encoding: gzip
+Content-Type: application/fhir+json; charset=UTF-8
+Request Body	
+{
+      "resourceType": "Practitioner",
+      "id": "2cbb35e1-d6b2-320f-996c-5d2ff58371ad",
+      "meta": {
+        "profile": [ "http://hl7.org/fhir/us/core/StructureDefinition/us-core-practitioner" ]
+      },
+      "extension": [ {
+        "url": "http://synthetichealth.github.io/synthea/utilization-encounters-extension",
+        "valueInteger": 47
+      } ],
+      "identifier": [ {
+        "system": "http://hl7.org/fhir/sid/us-npi",
+        "value": "9999999659"
+      } ],
+      "active": true,
+      "name": [ {
+        "family": "Ebert178",
+        "given": [ "Reynaldo722" ],
+        "prefix": [ "Dr." ]
+      } ],
+      "telecom": [ {
+        "extension": [ {
+          "url": "http://hl7.org/fhir/us/core/StructureDefinition/us-core-direct",
+          "valueBoolean": true
+        } ],
+        "system": "email",
+        "value": "Reynaldo722.Ebert178@example.com",
+        "use": "work"
+      } ],
+      "address": [ {
+        "line": [ "148 CHESTNUT STREET" ],
+        "city": "NEEDHAM",
+        "state": "MA",
+        "postalCode": "02494",
+        "country": "US"
+      } ],
+      "gender": "male"
+}
+ Response	 HTTP 201 Created
+Response Headers	
+date: Fri, 12 Mar 2021 03:13:39 GMT
+x-request-id: pkhzRxjaL2Lsesg1
+last-modified: Fri, 12 Mar 2021 03:13:39 GMT
+transfer-encoding: chunked
+x-frame-options: SAMEORIGIN
+x-powered-by: HAPI FHIR 5.1.0 REST Server (FHIR Server; FHIR 4.0.1/R4)
+content-location: https://pegacorn-fhirplace-gateway.site-a:30502/pegacorn/internal/fhir/r4/Practitioner/8/_history/1
+content-type: application/fhir+json; charset=UTF-8
+etag: W/"1"
+connection: keep-alive
+location: https://pegacorn-fhirplace-gateway.site-a:30502/pegacorn/internal/fhir/r4/Practitioner/8/_history/1
+strict-transport-security: max-age=31536000; includeSubDomains;
+Result Body JSON resource (1011 bytes)	
+Raw Message
+{
+  "resourceType": "Practitioner",
+  "id": "8",
+  "meta": {
+    "versionId": "1",
+    "lastUpdated": "2021-03-12T03:13:39.231+00:00",
+    "profile": [ "http://hl7.org/fhir/us/core/StructureDefinition/us-core-practitioner" ]
+  },
+  "extension": [ {
+    "url": "http://synthetichealth.github.io/synthea/utilization-encounters-extension",
+    "valueInteger": 47
+  } ],
+  "identifier": [ {
+    "system": "http://hl7.org/fhir/sid/us-npi",
+    "value": "9999999659"
+  } ],
+  "active": true,
+  "name": [ {
+    "family": "Ebert178",
+    "given": [ "Reynaldo722" ],
+    "prefix": [ "Dr." ]
+  } ],
+  "telecom": [ {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/us/core/StructureDefinition/us-core-direct",
+      "valueBoolean": true
+    } ],
+    "system": "email",
+    "value": "Reynaldo722.Ebert178@example.com",
+    "use": "work"
+  } ],
+  "address": [ {
+    "line": [ "148 CHESTNUT STREET" ],
+    "city": "NEEDHAM",
+    "state": "MA",
+    "postalCode": "02494",
+    "country": "US"
+  } ],
+  "gender": "male"
+}

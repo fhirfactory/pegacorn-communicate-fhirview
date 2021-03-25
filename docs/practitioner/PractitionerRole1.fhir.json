@@ -1,0 +1,198 @@
+{
+      "resourceType": "PractitionerRole",
+      "id": "4c8ee0cb-968f-66d6-f087-57268eb26f1d",
+      "meta": {
+        "profile": [ "http://hl7.org/fhir/us/core/StructureDefinition/us-core-practitionerrole" ]
+      },
+      "practitioner": {
+        "identifier": {
+          "system": "http://hl7.org/fhir/sid/us-npi",
+          "value": "9999999659"
+        },
+        "display": "Dr. Reynaldo722 Ebert178"
+      },
+      "organization": {
+        "identifier": {
+          "system": "https://github.com/synthetichealth/synthea",
+          "value": "6"
+        },
+        "display": "BETH ISRAEL DEACONESS HOSPITAL - NEEDHAM"
+      },
+      "code": [ {
+        "coding": [ {
+          "system": "http://nucc.org/provider-taxonomy",
+          "code": "208D00000X",
+          "display": "General Practice"
+        } ],
+        "text": "General Practice"
+      } ],
+      "specialty": [ {
+        "coding": [ {
+          "system": "http://nucc.org/provider-taxonomy",
+          "code": "208D00000X",
+          "display": "General Practice"
+        } ],
+        "text": "General Practice"
+      } ],
+      "location": [ {
+        "identifier": {
+          "system": "https://github.com/synthetichealth/synthea",
+          "value": "7"
+        },
+        "display": "BETH ISRAEL DEACONESS HOSPITAL - NEEDHAM"
+      } ],
+      "telecom": [ {
+        "system": "phone",
+        "value": "7814533002"
+      }, {
+        "extension": [ {
+          "url": "http://hl7.org/fhir/us/core/StructureDefinition/us-core-direct",
+          "valueBoolean": true
+        } ],
+        "system": "email",
+        "value": "Reynaldo722.Ebert178@example.com",
+        "use": "work"
+      } ]
+}
+
+
+
+ Request	POST https://pegacorn-fhirplace-gateway.site-a:30502/pegacorn/internal/fhir/r4/PractitionerRole?_format=json&_pretty=true
+Request Headers	
+Accept-Charset: utf-8
+Accept: application/fhir+json;q=1.0, application/json+fhir;q=0.9
+x-api-key: fmg2vPYxKYYjwcQq3fwP8zXlQKSehzgPyvR3u2Lde2eINx86QwV1ENH2wpD
+User-Agent: HAPI-FHIR/5.1.0 (FHIR Client; FHIR 4.0.1/R4; apache)
+Accept-Encoding: gzip
+Content-Type: application/fhir+json; charset=UTF-8
+Request Body	
+{
+      "resourceType": "PractitionerRole",
+      "id": "4c8ee0cb-968f-66d6-f087-57268eb26f1d",
+      "meta": {
+        "profile": [ "http://hl7.org/fhir/us/core/StructureDefinition/us-core-practitionerrole" ]
+      },
+      "practitioner": {
+        "identifier": {
+          "system": "http://hl7.org/fhir/sid/us-npi",
+          "value": "9999999659"
+        },
+        "display": "Dr. Reynaldo722 Ebert178"
+      },
+      "organization": {
+        "identifier": {
+          "system": "https://github.com/synthetichealth/synthea",
+          "value": "6"
+        },
+        "display": "BETH ISRAEL DEACONESS HOSPITAL - NEEDHAM"
+      },
+      "code": [ {
+        "coding": [ {
+          "system": "http://nucc.org/provider-taxonomy",
+          "code": "208D00000X",
+          "display": "General Practice"
+        } ],
+        "text": "General Practice"
+      } ],
+      "specialty": [ {
+        "coding": [ {
+          "system": "http://nucc.org/provider-taxonomy",
+          "code": "208D00000X",
+          "display": "General Practice"
+        } ],
+        "text": "General Practice"
+      } ],
+      "location": [ {
+        "identifier": {
+          "system": "https://github.com/synthetichealth/synthea",
+          "value": "7"
+        },
+        "display": "BETH ISRAEL DEACONESS HOSPITAL - NEEDHAM"
+      } ],
+      "telecom": [ {
+        "system": "phone",
+        "value": "7814533002"
+      }, {
+        "extension": [ {
+          "url": "http://hl7.org/fhir/us/core/StructureDefinition/us-core-direct",
+          "valueBoolean": true
+        } ],
+        "system": "email",
+        "value": "Reynaldo722.Ebert178@example.com",
+        "use": "work"
+      } ]
+}
+ Response	 HTTP 201 Created
+Response Headers	
+date: Fri, 12 Mar 2021 03:18:04 GMT
+x-request-id: dgarlPfaYE0a7ywx
+last-modified: Fri, 12 Mar 2021 03:18:04 GMT
+transfer-encoding: chunked
+x-frame-options: SAMEORIGIN
+x-powered-by: HAPI FHIR 5.1.0 REST Server (FHIR Server; FHIR 4.0.1/R4)
+content-location: https://pegacorn-fhirplace-gateway.site-a:30502/pegacorn/internal/fhir/r4/PractitionerRole/9/_history/1
+content-type: application/fhir+json; charset=UTF-8
+etag: W/"1"
+connection: keep-alive
+location: https://pegacorn-fhirplace-gateway.site-a:30502/pegacorn/internal/fhir/r4/PractitionerRole/9/_history/1
+strict-transport-security: max-age=31536000; includeSubDomains;
+Result Body JSON resource (1495 bytes)	
+Raw Message
+{
+  "resourceType": "PractitionerRole",
+  "id": "9",
+  "meta": {
+    "versionId": "1",
+    "lastUpdated": "2021-03-12T03:18:04.204+00:00",
+    "profile": [ "http://hl7.org/fhir/us/core/StructureDefinition/us-core-practitionerrole" ]
+  },
+  "practitioner": {
+    "identifier": {
+      "system": "http://hl7.org/fhir/sid/us-npi",
+      "value": "9999999659"
+    },
+    "display": "Dr. Reynaldo722 Ebert178"
+  },
+  "organization": {
+    "identifier": {
+      "system": "https://github.com/synthetichealth/synthea",
+      "value": "6"
+    },
+    "display": "BETH ISRAEL DEACONESS HOSPITAL - NEEDHAM"
+  },
+  "code": [ {
+    "coding": [ {
+      "system": "http://nucc.org/provider-taxonomy",
+      "code": "208D00000X",
+      "display": "General Practice"
+    } ],
+    "text": "General Practice"
+  } ],
+  "specialty": [ {
+    "coding": [ {
+      "system": "http://nucc.org/provider-taxonomy",
+      "code": "208D00000X",
+      "display": "General Practice"
+    } ],
+    "text": "General Practice"
+  } ],
+  "location": [ {
+    "identifier": {
+      "system": "https://github.com/synthetichealth/synthea",
+      "value": "7"
+    },
+    "display": "BETH ISRAEL DEACONESS HOSPITAL - NEEDHAM"
+  } ],
+  "telecom": [ {
+    "system": "phone",
+    "value": "7814533002"
+  }, {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/us/core/StructureDefinition/us-core-direct",
+      "valueBoolean": true
+    } ],
+    "system": "email",
+    "value": "Reynaldo722.Ebert178@example.com",
+    "use": "work"
+  } ]
+}
